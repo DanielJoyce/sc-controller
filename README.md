@@ -48,6 +48,16 @@ Based on [Standalone Steam Controller Driver](https://github.com/ynsta/steamcont
   - `python2 setup.py build`
   - `python2 setup.py install`
 
+### Ubuntu
+  - sudo apt-get install libacl1-dev
+  - sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
+  - virtualenv -p python3 virtualenv
+  - source ./virtualenv/bin/activate
+  - pip install -f requirements.txt
+  - setup.py build
+  - setup.py install
+
+
 
 ## Running with non distro-specific package          
   - Download and extract [latest release](https://github.com/kozec/sc-controller/releases/latest)
