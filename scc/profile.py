@@ -4,7 +4,7 @@ SC-Controller - Profile
 
 Handles mapping profile stored in json file
 """
-from __future__ import unicode_literals
+
 
 from scc.constants import LEFT, RIGHT, CPAD, WHOLE, STICK, GYRO
 from scc.constants import SCButtons, HapticPos
@@ -238,7 +238,7 @@ class Profile(object):
 				dct[x] = dct[x].compress()
 		self.stick = self.stick.compress()
 		self.gyro = self.gyro.compress()
-		for menu in self.menus.values():
+		for menu in list(self.menus.values()):
 			menu.compress()
 	
 	

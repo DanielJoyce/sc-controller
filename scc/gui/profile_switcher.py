@@ -8,7 +8,7 @@ Set of widgets designed to allow user to select profile, placed in one Gtk.Box:
 ... where (S) is Save button that can be shown on demand and (ch) is change
 indicator drawn in combobox.
 """
-from __future__ import unicode_literals
+
 from scc.tools import _
 
 from gi.repository import Gtk, Gio, GLib, GObject
