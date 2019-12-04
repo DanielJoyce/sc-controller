@@ -27,11 +27,11 @@ function build_dep() {
 	mkdir -p /tmp/${NAME}
 	pushd /tmp/${NAME}
 	tar --extract --strip-components=1 -f /tmp/${NAME}.tar.gz
-	PYTHONPATH=${BUILD_APPDIR}/usr/lib/python2.7/site-packages python2 \
+	PYTHONPATH=${BUILD_APPDIR}/usr/lib/python3.7/site-packages python3 \
 		setup.py install --optimize=1 \
 		--prefix="/usr/" --root="${BUILD_APPDIR}"
-	mkdir -p "${BUILD_APPDIR}/usr/lib/python2.7/site-packages/"
-	python2 setup.py install --prefix="/usr/" --root="${BUILD_APPDIR}"
+	mkdir -p "${BUILD_APPDIR}/usr/lib/python3.7/site-packages/"
+	python3 setup.py install --prefix="/usr/" --root="${BUILD_APPDIR}"
 	popd
 }
 
@@ -48,7 +48,7 @@ set -ex		# display commands, terminate after 1st failure
 # Download deps
 download_dep "python-evdev-0.7.0" "https://github.com/gvalkov/python-evdev/archive/v0.7.0.tar.gz"
 download_dep "pylibacl-0.5.3" "https://github.com/iustin/pylibacl/releases/download/pylibacl-v0.5.3/pylibacl-0.5.3.tar.gz"
-download_dep "python-gobject-3.26.1" "https://archive.archlinux.org/packages/p/python2-gobject/python2-gobject-3.26.1-1-x86_64.pkg.tar.xz"
+download_dep "python-gobject-3.26.1" "https://archive.archlinux.org/packages/p/python3-gobject/python3-gobject-3.26.1-1-x86_64.pkg.tar.xz"
 download_dep "libpng-1.6.34" "https://archive.archlinux.org/packages/l/libpng/libpng-1.6.34-2-x86_64.pkg.tar.xz"
 download_dep "gdk-pixbuf-2.36.9" "https://archive.archlinux.org/packages/g/gdk-pixbuf2/gdk-pixbuf2-2.36.9-1-x86_64.pkg.tar.xz"
 download_dep "libcroco-0.6.13" "https://archive.archlinux.org/packages/l/libcroco/libcroco-0.6.13-1-x86_64.pkg.tar.xz"
@@ -58,12 +58,12 @@ download_dep "icu-60.2" "https://archive.archlinux.org/packages/i/icu/icu-60.2-1
 download_dep "zlib-1:1.2.11" "https://archive.archlinux.org/packages/z/zlib/zlib-1%3A1.2.11-1-x86_64.pkg.tar.xz"
 
 # Prepare & build deps
-export PYTHONPATH=${BUILD_APPDIR}/usr/lib/python2.7/site-packages/
+export PYTHONPATH=${BUILD_APPDIR}/usr/lib/python3.7/site-packages/
 mkdir -p "$PYTHONPATH"
 if [[ $(grep ID_LIKE /etc/os-release) == *"suse"* ]] ; then
 	# Special handling for OBS
 	ln -s lib64 ${BUILD_APPDIR}/usr/lib
-	export PYTHONPATH="$PYTHONPATH":${BUILD_APPDIR}/usr/lib64/python2.7/site-packages/
+	export PYTHONPATH="$PYTHONPATH":${BUILD_APPDIR}/usr/lib64/python3.7/site-packages/
 	LIB=lib64
 fi
 
@@ -99,14 +99,14 @@ rm -R "${BUILD_APPDIR}/usr/share/vala"
 rm -R "${BUILD_APPDIR}/usr/share/icu"
 
 # Build important part
-python2 setup.py build
-python2 setup.py install --prefix ${BUILD_APPDIR}/usr
+python3 setup.py build
+python3 setup.py install --prefix ${BUILD_APPDIR}/usr
 
 # Move udev stuff
 mv ${BUILD_APPDIR}/usr/lib/udev/rules.d/69-${APP}.rules ${BUILD_APPDIR}/
 rmdir ${BUILD_APPDIR}/usr/lib/udev/rules.d/
 rmdir ${BUILD_APPDIR}/usr/lib/udev/
-cp "/usr/include/linux/input-event-codes.h" ${BUILD_APPDIR}/usr/${LIB}/python2.7/site-packages/scc/
+cp "/usr/include/linux/input-event-codes.h" ${BUILD_APPDIR}/usr/${LIB}/python3.7/site-packages/scc/
 
 # Move & patch desktop file
 mv ${BUILD_APPDIR}/usr/share/applications/${APP}.desktop ${BUILD_APPDIR}/
