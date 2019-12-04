@@ -70,7 +70,9 @@ class OSDWindow(Gtk.Window):
 		colors = OSDCssMagic(colors)
 		try:
 			css_file = os.path.join(get_share_path(), "osd-styles", config["osd_style"])
-			css = file(css_file, "r").read()
+			css = None
+			with open(css_file, "r") as file: 
+				css = file.read()
 			if ((Gtk.get_major_version(), Gtk.get_minor_version()) > (3, 20)):
 				css += OSDWindow.CSS_3_20
 			OSDWindow.css_provider = Gtk.CssProvider()
@@ -290,7 +292,7 @@ class StickController(GObject.GObject, TimerManager):
 	  Both values are one of -1, 0, 1 for left/none/right.
 	"""
 	__gsignals__ = {
-			b"direction"			: (GObject.SignalFlags.RUN_FIRST, None, (int, int)),
+			"direction"			: (GObject.SignalFlags.RUN_FIRST, None, (int, int)),
 	}
 	REPEAT_DELAY = 0.2
 	DIRECTION_TO_XY = {
