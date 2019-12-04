@@ -251,11 +251,11 @@ class App(Gtk.Application, UserDataManager, BindingEditor):
 		# TODO: Maybe not best place to do this
 		try:
 			# Dynamic modules
-			rawlist = file("/proc/modules", "r").read().split("\n")
+			rawlist = open("/proc/modules", "r").read().split("\n")
 			kernel_mods = [ line.split(" ")[0] for line in rawlist ]
 			# Built-in modules
 			release = platform.uname()[2]
-			rawlist = file("/lib/modules/%s/modules.builtin" % release, "r").read().split("\n")
+			rawlist = open("/lib/modules/%s/modules.builtin" % release, "r").read().split("\n")
 			kernel_mods += [ os.path.split(x)[-1].split(".")[0] for x in rawlist ]
 		except Exception:
 			# Maybe running on BSD or Windows...
@@ -360,7 +360,8 @@ class App(Gtk.Application, UserDataManager, BindingEditor):
 		for color in self.hilights:
 			for i in self.hilights[color]:
 				h[i] = color
-		self.background.hilight(h)
+		if(self.background != None):
+			self.background.hilight(h)
 	
 	
 	def hint(self, button):
@@ -1079,7 +1080,7 @@ class App(Gtk.Application, UserDataManager, BindingEditor):
 			if not widget.is_visible():
 				widget.show()
 			# Grab values
-			ax, ay, aw, trash = self.background.get_area_position(area)
+			ax, ay, aw, _trash = self.background.get_area_position(area)
 			cw = widget.get_allocation().width
 			# Compute center
 			x, y = ax + aw * 0.5 - cw * 0.5, ay + 1.0 - cw * 0.5

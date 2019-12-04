@@ -708,7 +708,7 @@ class SCCDaemon(Daemon):
 		with self.lock:
 			client = Client(connection, self.default_mapper, rfile, wfile)
 			self.clients.add(client)
-			wfile.write(b"SCCDaemon\n")
+			wfile.write("SCCDaemon\n".encode("utf-8"))
 			wfile.write(("Version: %s\n" % (DAEMON_VERSION,)).encode("utf-8"))
 			wfile.write(("PID: %s\n" % (os.getpid(),)).encode("utf-8"))
 			self.send_controller_list(wfile.write)
@@ -721,13 +721,13 @@ class SCCDaemon(Daemon):
 		
 		while True:
 			try:
-				line = rfile.readline()
+				line = rfile.readline().decode("utf-8")
 			except Exception:
 				# Connection terminated
 				break
 			if len(line) == 0: break
-			if len(line.strip(b"\t\n ")) > 0:
-				self._handle_message(client, line.strip(b"\n"))
+			if len(line.strip("\t\n ")) > 0:
+				self._handle_message(client, line.strip("\n"))
 		
 		with self.lock:
 			client.unlock_actions(self)
