@@ -20,8 +20,8 @@ log = logging.getLogger("Mapper")
 class Mapper(object):
 	DEBUG = False
 	
-	def __init__(self, profile, scheduler, keyboard=b"SCController Keyboard",
-				mouse=b"SCController Mouse",
+	def __init__(self, profile, scheduler, keyboard="SCController Keyboard",
+				mouse="SCController Mouse",
 				gamepad=True, poller=None):
 		"""
 		If any of keyboard, mouse or gamepad is set to None, that device

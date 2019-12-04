@@ -277,7 +277,6 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
 		_key_separator, _item_separator, _sort_keys, _skipkeys, _one_shot,
 		## HACK: hand-optimized bytecode; turn globals into locals
 		ValueError=ValueError,
-		basestring=str,
 		dict=dict,
 		float=float,
 		id=id,
@@ -366,7 +365,7 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
 		if _sort_keys:
 			items = sorted(list(dct.items()), key=lambda kv: kv[0])
 		else:
-			items = iter(dct.items())
+			items = iter(list(dct.items()))
 		for key, value in items:
 			if isinstance(key, str):
 				pass

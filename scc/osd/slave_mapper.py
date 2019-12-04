@@ -84,5 +84,5 @@ class SlaveMapper(Mapper):
 			# print what, self.profile.pads[what]
 			self.profile.pads[what].whole(self, data[0], data[1], what)
 		else:
-			print(">>>", what, data)
+			print((">>>", what, data))
 		self.generate_events()

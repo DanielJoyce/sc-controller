@@ -65,7 +65,7 @@ class RadialMenu(Menu):
 		
 		for k in RadialMenu.RECOLOR_STROKES:
 			if k in config['osd_colors'] and k in source_colors:
-				print("REC", source_colors[k], config['osd_colors'][k])
+				print(("REC", source_colors[k], config['osd_colors'][k]))
 				editor.recolor_strokes(source_colors[k], config['osd_colors'][k])
 		
 		editor.commit()
@@ -291,5 +291,5 @@ if __name__ == "__main__":
 		sys.exit(1)
 	m.run()
 	if m.get_exit_code() == 0:
-		print(m.get_selected_item_id())
+		print((m.get_selected_item_id()))
 	sys.exit(m.get_exit_code())

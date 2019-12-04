@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import os, ctypes, time
+import os, ctypes, sys, time
 from ctypes import Structure, POINTER, c_bool, c_int16, c_uint16, c_int32, byref
 from math import pi, copysign, sqrt
 from scc.lib.libusb1 import timeval
@@ -224,11 +224,7 @@ class UInput(object):
 			for i in range(MAX_FEEDBACK_EFFECTS):
 				self._ff_events[i].contents = FeedbackEvent()
 		
-		try:
-			if self._lib.uinput_module_version() != UNPUT_MODULE_VERSION:
-				raise Exception()
-		except:
-			import sys
+		if self._lib.uinput_module_version() != UNPUT_MODULE_VERSION:
 			print("Invalid native module version. Please, recompile 'libuinput.so'", file=sys.stderr)
 			print("If you are running sc-controller from source, you can do this by removing 'build' directory", file=sys.stderr)
 			print("and runinng 'python setup.py build' or 'run.sh' script", file=sys.stderr)
@@ -364,7 +360,7 @@ class Gamepad(UInput):
 	"""
 
 	def __init__(self, name):
-		super(Gamepad, self).__init__(vendor=0x045e,
+		super().__init__(vendor=0x045e,
 									  product=0x028e,
 									  version=1,
 									  name=name,
@@ -406,7 +402,7 @@ class Mouse(UInput):
 	DEFAULT_SCR_YSCALE = 0.0005
 
 	def __init__(self, name):
-		super(Mouse, self).__init__(vendor=0x28de,
+		super().__init__(vendor=0x28de,
 									product=0x1142,
 									version=1,
 									name=name,
@@ -528,7 +524,7 @@ class Keyboard(UInput):
 	"""
 
 	def __init__(self, name):
-		super(Keyboard, self).__init__(vendor=0x28de,
+		super().__init__(vendor=0x28de,
 									   product=0x1142,
 									   version=1,
 									   name=name,

@@ -283,7 +283,7 @@ class ControllerRegistration(Editor):
 			
 			return rv
 		
-		for code, target in self._mappings.items():
+		for code, target in list(self._mappings.items()):
 			if target in SCButtons:
 				config['buttons'][code] = nameof(target)
 			elif isinstance(target, DPadEmuData):

@@ -431,7 +431,7 @@ class SCCDaemon(Daemon):
 			self.xdisplay = None
 			return
 		
-		self.xdisplay = X.open_display(os.environ["DISPLAY"])
+		self.xdisplay = X.open_display(os.environ["DISPLAY"].encode("utf-8"))
 		if self.xdisplay:
 			log.debug("Connected to XServer %s", os.environ["DISPLAY"])
 			
@@ -726,8 +726,8 @@ class SCCDaemon(Daemon):
 				# Connection terminated
 				break
 			if len(line) == 0: break
-			if len(line.strip("\t\n ")) > 0:
-				self._handle_message(client, line.strip("\n"))
+			if len(line.strip(b"\t\n ")) > 0:
+				self._handle_message(client, line.strip(b"\n"))
 		
 		with self.lock:
 			client.unlock_actions(self)
