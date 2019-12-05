@@ -168,7 +168,7 @@ class MenuData(object):
 		Loads menu from file.
 		Actions are parsed only if action_parser is set to ActionParser instance.
 		"""
-		return MenuData.from_fileobj(file(filename, "r"), action_parser)
+		return MenuData.from_fileobj(open(filename, "r"), action_parser)
 	
 	
 	@staticmethod
@@ -210,7 +210,7 @@ class MenuItem(object):
 	
 	def encode(self):
 		""" Returns item data as dict storable in json (profile) file """
-		if self.action and type(self.action) in (str, str):
+		if self.action and type(self.action) is str:
 			rv = { 'action' : self.action }
 		elif self.action:
 			rv = self.action.encode()

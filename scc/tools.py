@@ -53,7 +53,6 @@ def init_logging(prefix="", suffix=""):
 			(c)
 			for c in args
 		])
-		msg = msg if type(msg) is str else str(msg).decode("utf-8")
 		old_log(self, level, msg, args, exc_info, extra)
 	logging.Logger._log = _log
 

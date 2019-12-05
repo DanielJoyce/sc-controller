@@ -446,7 +446,7 @@ class App(Gtk.Application, UserDataManager, BindingEditor):
 			if a.name:
 				a = NameModifier(a.name, a)
 			clp = Gtk.Clipboard.get_default(Gdk.Display.get_default())
-			clp.set_text(a.to_string().encode('utf-8'), -1)
+			clp.set_text(a.to_string(), -1)
 			clp.store()
 	
 	
@@ -459,7 +459,7 @@ class App(Gtk.Application, UserDataManager, BindingEditor):
 		clp = Gtk.Clipboard.get_default(Gdk.Display.get_default())
 		text = clp.wait_for_text()
 		if text:
-			a = GuiActionParser().restart(text.decode('utf-8')).parse()
+			a = GuiActionParser().restart(text).parse()
 			if not isinstance(a, InvalidAction):
 				self.on_action_chosen(self.context_menu_for, a)
 	

@@ -67,8 +67,8 @@ class ShellCommandAction(Action, SpecialAction):
 	SA = COMMAND = "shell"
 	
 	def __init__(self, command):
-		if type(command) == str:
-			command = command.decode("unicode_escape")
+		# if type(command) == str:
+		# 	command = command.decode("unicode_escape")
 		assert type(command) == str
 		Action.__init__(self, command)
 		self.command = command
@@ -84,7 +84,7 @@ class ShellCommandAction(Action, SpecialAction):
 	
 	
 	def to_string(self, multiline=False, pad=0):
-		return (" " * pad) + "%s('%s')" % (self.COMMAND, self.parameters[0].encode('unicode_escape'))
+		return (" " * pad) + "%s('%s')" % (self.COMMAND, self.parameters[0])
 	
 	
 	def button_press(self, mapper):

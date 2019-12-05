@@ -408,7 +408,7 @@ class EvdevDriver(object):
 				log.exception(e)
 				return False
 			try:
-				controller = EvdevController(self.daemon, dev, config_file.decode("utf-8"), config)
+				controller = EvdevController(self.daemon, dev, config_file, config)
 			except Exception as e:
 				log.debug("Failed to add evdev device: %s", e)
 				log.exception(e)

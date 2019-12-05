@@ -324,7 +324,7 @@ class ActionEditor(Editor):
 	def get_name(self):
 		""" Returns action name as set in editor entry """
 		entName = self.builder.get_object("entName")
-		return entName.get_text().decode("utf-8").strip(" \t")
+		return entName.get_text().strip(" \t")
 	
 	
 	def get_current_page(self):
@@ -335,7 +335,7 @@ class ActionEditor(Editor):
 	def _set_title(self):
 		""" Copies title from text entry into action instance """
 		entName = self.builder.get_object("entName")
-		name = entName.get_text().decode("utf-8").strip(" \t\r\n")
+		name = entName.get_text().strip(" \t\r\n")
 		if len(name) < 1:
 			self._action.name = None
 		elif not self._action:
