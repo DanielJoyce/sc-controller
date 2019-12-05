@@ -446,7 +446,7 @@ class HIDController(USBDevice, Controller):
 		try:
 			if full_path:
 				log.debug("Loading descriptor from '%s'", full_path)
-				return [ ord(x) for x in file(full_path, "rb").read(1024) ]
+				return [ ord(x) for x in open(full_path, "rb").read(1024) ]
 		except Exception as e:
 			log.exception(e)
 		return None

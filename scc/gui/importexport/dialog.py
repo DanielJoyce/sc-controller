@@ -36,7 +36,7 @@ class Dialog(Editor, ComboSetter, Export, ImportVdf, ImportSccprofile):
 		or None if type is not supported.
 		"""
 		try:
-			f = file(filename, 'rb').read(1024)
+			f = open(filename, 'rb').read(1024)
 		except Exception as e:
 			# File not readable
 			log.error(traceback.format_exc())

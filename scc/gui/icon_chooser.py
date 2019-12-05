@@ -173,7 +173,7 @@ class IconChooser(Editor, UserDataManager):
 		licensefile = os.path.join(path, "LICENCES")
 		if not os.path.exists(licensefile):
 			return None
-		for line in file(licensefile, "r").readlines():
+		for line in open(licensefile, "r").readlines():
 			if line.startswith(name):
 				if "-" in line:
 					return line.split("-")[-1].strip("\t\r\n ")
