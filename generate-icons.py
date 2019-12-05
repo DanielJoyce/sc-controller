@@ -88,5 +88,5 @@ for tp in ("sc", "scbt", "fake", "ds4", "hid", "rpad"):
 		recolor(tree, RECOLORS[key])
 		
 		out = "%s/%s-%s.svg" % (CICONS, tp, key)
-		file(out, "w").write(ET.tostring(tree))
+		open(out, "w").write(ET.tostring(tree))
 		print(out)

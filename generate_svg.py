@@ -314,7 +314,7 @@ class Generator(object):
 		for b in boxes:
 			b.place(self, root)
 		
-		file("out.svg", "w").write(svg.to_string())
+		open("out.svg", "w").write(svg.to_string())
 	
 	
 	
