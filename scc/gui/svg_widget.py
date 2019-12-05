@@ -8,8 +8,15 @@ Also supports clicking on areas defined in SVG image.
 
 from scc.tools import _
 
+import sys, importlib
+#TODO Black magic At some point ElementTree got a C implementation for speed, and you can't
+# monkeypatch properties such as 'parent' onto classes implemented in C. So here we remove the c
+# impl and force it to use the python fallback.
+sys.modules.pop('xml.etree.ElementTree', None)
+sys.modules['_elementtree'] = None
+ET = importlib.import_module('xml.etree.ElementTree')
+
 from gi.repository import Gtk, Gdk, GObject, GdkPixbuf, Rsvg
-from xml.etree import ElementTree as ET
 from math import sin, cos, pi as PI
 from collections import OrderedDict
 import os, sys, re, logging
@@ -53,7 +60,7 @@ class SVGWidget(Gtk.EventBox):
 	
 	
 	def set_image(self, filename):
-		self.current_svg = open(filename, "r").read().encode("utf-8")
+		self.current_svg = open(filename, "r").read().encode()
 		self.cache = OrderedDict()
 		self.areas = []
 		self.parse_image()
@@ -286,7 +293,7 @@ class SVGEditor(object):
 		
 		Return self.
 		"""
-		self._svgw.current_svg = ET.tostring(self._tree).encode("utf-8")
+		self._svgw.current_svg = ET.tostring(self._tree)
 		self._svgw.cache = OrderedDict()
 		self._svgw.hilight({})
 		
