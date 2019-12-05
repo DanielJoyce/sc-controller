@@ -240,7 +240,7 @@ class Generator(object):
 	PADDING = 10
 	
 	def __init__(self):
-		svg = SVGEditor(file("images/binding-display.svg").read())
+		svg = SVGEditor(open("images/binding-display.svg").read())
 		background = SVGEditor.get_element(svg, "background")
 		self.label_template = SVGEditor.get_element(svg, "label_template")
 		self.line_height = int(float(self.label_template.attrib.get("height") or 8))

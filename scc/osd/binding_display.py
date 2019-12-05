@@ -352,7 +352,7 @@ class Box(object):
 					# (library that gnome uses to render SVGs) can't render
 					# linked images. Embeding is used instead.
 					image = 'data:image/svg+xml;base64,%s' % (
-						base64.b64encode(file(image, "rb").read())
+						base64.b64encode(open(image, "rb").read())
 					)
 					# Another problem: rsvg will NOT draw image unless href
 					# tag uses namespace. No idea why is that, but I spent

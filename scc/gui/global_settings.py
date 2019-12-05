@@ -644,7 +644,7 @@ class GlobalSettings(Editor, UserDataManager, ComboSetter):
 		theme = cb.get_model().get_value(cb.get_active_iter(), 0)
 		if theme in (None, "None"): return
 		filename = os.path.join(get_share_path(), "osd-styles", theme)
-		data = json.loads(file(filename, "r").read())
+		data = json.loads(open(filename, "r").read())
 		
 		# Transfer values from json to config
 		for grp in ("osd_colors", "osk_colors"):
