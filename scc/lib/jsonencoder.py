@@ -6,6 +6,7 @@ Only idea here is to have lists encoded in single line.
 """
 import codecs
 import re
+import json
 
 try:
 	from _json import encode_basestring_ascii as c_encode_basestring_ascii
@@ -228,7 +229,7 @@ class JSONEncoder(object):
 			markers = None
 		# TODO THIS IS THE PROBLEM!!!
 		# TODO Hacky fix
-		_encoder = lambda s: '"%s"' % s
+		_encoder = lambda s: json.dumps(s)
 
 		def floatstr(o, allow_nan=self.allow_nan,
 				_repr=FLOAT_REPR, _inf=INFINITY, _neginf=-INFINITY):
