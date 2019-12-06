@@ -10,7 +10,7 @@ action only prints warning to console.
 """
 
 
-from scc.constants import FE_STICK, FE_TRIGGER, FE_PAD, SCButtons
+from scc.constants import FE_STICK, FE_TRIGGER, FE_PAD
 from scc.constants import LEFT, RIGHT, STICK, SCButtons, SAME
 from scc.constants import STICK_PAD_MAX, DEFAULT
 from scc.actions import Action, NoAction, SpecialAction, ButtonAction
@@ -49,7 +49,7 @@ class ChangeProfileAction(Action, SpecialAction):
 	
 	def to_string(self, multiline=False, pad=0):
 		return (" " * pad) + "%s('%s')" % (self.COMMAND,
-				self.profile.encode('utf-8').encode('string_escape'))
+				self.profile.encode('utf-8').decode('unicode_escape'))
 	
 	
 	def button_release(self, mapper):
@@ -68,7 +68,7 @@ class ShellCommandAction(Action, SpecialAction):
 	
 	def __init__(self, command):
 		# if type(command) == str:
-		# 	command = command.decode("unicode_escape")
+		# command = command.decode("unicode_escape")
 		assert type(command) == str
 		Action.__init__(self, command)
 		self.command = command
@@ -233,7 +233,7 @@ class OSDAction(Action, SpecialAction):
 		if self.action:
 			parameters.append(self.action.to_string(multiline=multiline, pad=pad))
 		else:
-			parameters.append("'%s'" % (str(self.text).encode('string_escape'),))
+			parameters.append("'%s'" % (str(self.text).encode('utf-8').decode('unicode_escape'),))
 		return (" " * pad) + "%s(%s)" % (self.COMMAND, ",".join(parameters))
 	
 	
@@ -537,7 +537,7 @@ class DialogAction(Action, SpecialAction):
 			rv += "%s, " % (nameof(self.confirm_with),)
 			if self.cancel_with != DEFAULT:
 				rv += "%s, " % (nameof(self.cancel_with),)
-		rv += "'%s', " % (self.text.encode('string_escape'),)
+		rv += "'%s', " % (self.text.encode('utf-8').decode('unicode_escape'),)
 		if multiline:
 			rv += "\n%s" % (" " * (pad + 2))
 		for option in self.options:

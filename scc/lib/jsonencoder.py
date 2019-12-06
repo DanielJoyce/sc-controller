@@ -47,8 +47,6 @@ def py_encode_basestring_ascii(s):
 	"""Return an ASCII-only JSON representation of a Python string
 
 	"""
-	if isinstance(s, str) and HAS_UTF8.search(s) is not None:
-		s = s.decode('utf-8')
 	def replace(match):
 		s = match.group(0)
 		try:
@@ -195,16 +193,16 @@ class JSONEncoder(object):
 
 		"""
 		# This is for extremely simple cases and benchmarks.
-		if isinstance(o, str):
-			if isinstance(o, str):
-				_encoding = self.encoding
-				if (_encoding is not None
-						and not (_encoding == 'utf-8')):
-					o = o.decode(_encoding)
-			if self.ensure_ascii:
-				return encode_basestring_ascii(o)
-			else:
-				return encode_basestring(o)
+		# if isinstance(o, str):
+			# if isinstance(o, str):
+			# 	_encoding = self.encoding
+			# 	if (_encoding is not None
+			# 			and not (_encoding == 'utf-8')):
+			# 		o = o.decode(_encoding)
+			# if self.ensure_ascii:
+			# 	return encode_basestring_ascii(o)
+			# else:
+			# 	return encode_basestring(o)
 		# This doesn't pass the iterator directly to ''.join() because the
 		# exceptions aren't as detailed.  The list call should be roughly
 		# equivalent to the PySequence_Fast that ''.join() would do.

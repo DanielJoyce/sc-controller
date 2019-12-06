@@ -122,9 +122,10 @@ def nameof(e):
 
 def shjoin(lst):
 	""" Joins list into shell-escaped, utf-8 encoded string """
+	# TODO Seems very very wrong and hacky, must be easier way...
 	s = [ str(x).encode("utf-8") for x in lst ]
 	#   - escape quotes
-	s = [ x.encode('string_escape') if (b'"' in x or b"'" in x) else x for x in s ]
+	s = [ x.decode('unicode_escape') if (b'"' in x or b"'" in x) else x.decode('utf-8') for x in s ]
 	#   - quote strings with spaces
 	s = [ b"'%s'" % (x,) if b" " in x else x for x in s ]
 	return b" ".join(s)
