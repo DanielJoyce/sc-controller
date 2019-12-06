@@ -86,7 +86,6 @@ class ShellCommandAction(Action, SpecialAction):
 	def to_string(self, multiline=False, pad=0):
 		return (" " * pad) + "%s('%s')" % (self.COMMAND, self.parameters[0])
 	
-	
 	def button_press(self, mapper):
 		# Executes only when button is pressed
 		return self.execute(mapper)
